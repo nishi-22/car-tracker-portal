@@ -7,7 +7,10 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build-prod": "ng build --prod",
+    "upload-dist": "npm run build-prod &&  ./uploadDist.sh",
+    "deploy": "gcloud app deploy"
   },
   "private": true,
   "dependencies": {
