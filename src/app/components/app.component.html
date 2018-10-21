@@ -1,5 +1,10 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
-  <mat-toolbar>Car Tracker Portal</mat-toolbar>
-  <app-vehicle-list></app-vehicle-list>
+  <mat-toolbar>
+    Car Tracker Portal
+    <nav>
+      <a routerLink="/vehicle-list" routerLinkActive="active">Vehicle List</a>
+    </nav>
+  </mat-toolbar>
+  <router-outlet></router-outlet>
 </div>
