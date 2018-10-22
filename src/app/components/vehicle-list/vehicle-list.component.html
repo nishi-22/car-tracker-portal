@@ -3,12 +3,12 @@
     <span id="{{column.id}}">{{column.id}}</span>
   </div>
   <table mat-table [dataSource]="dataSource" style="width: 100%">
-    <ng-container matColumnDef="{{column.id}}" *ngFor="let column of columnNames">
+    <ng-container matColumnDef="{{column.id}}" *ngFor="let column of columnNames; let i = index">
       <mat-header-cell *matHeaderCellDef mat-sort-header> {{column.value}} </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element[column.id]}} </mat-cell>
+      <mat-cell [attr.data-index]="i"  *matCellDef="let element"> {{element[column.id]}} </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"  (click)="goToVehicleDetailPage($event, row)"></mat-row>
   </table>
 </div>

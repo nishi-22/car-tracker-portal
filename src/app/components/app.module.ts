@@ -9,16 +9,21 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
 import { RouterModule, Routes } from '@angular/router';
+import { VehicleDetailComponent } from './vehicle-detail/vehicle-detail.component';
+
+import { AgmCoreModule } from '@agm/core';
 
 const appRoutes: Routes = [
   { path: 'vehicle-list', component: VehicleListComponent },
+  { path: 'vehicle-detail/:vin', component: VehicleDetailComponent},
   { path: '', component: VehicleListComponent },
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    VehicleListComponent
+    VehicleListComponent,
+    VehicleDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -27,9 +32,11 @@ const appRoutes: Routes = [
     HttpClientModule,
     MatToolbarModule,
     RouterModule.forRoot(
-      appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
-    )
+      appRoutes
+    ),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBUGp-lAiwytAAom2IkCtRxyalDnAesdb4'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

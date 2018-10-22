@@ -9,11 +9,17 @@ import { Observable } from 'rxjs';
 })
 export class VehicleService {
 
-  constructor(private httpClient: HttpClient) { }
+  //carTrackerAPI: string = "https://car-tracker-api-219421.appspot.com";
+  carTrackerAPI: string = "http://localhost:8080";
 
-  getVehicles():Observable<any> {
-
-    return this.httpClient.get('https://car-tracker-api-219421.appspot.com/vehicles')
+  constructor(private httpClient: HttpClient) {
   }
 
+  getVehicles():Observable<any> {
+    return this.httpClient.get(`${this.carTrackerAPI}/vehicles`)
+  }
+
+  getVehiclePositions(vin: string): Observable<any> {
+    return this.httpClient.get(`${this.carTrackerAPI}/readings/vehicle/position/${vin}`);
+  }
 }
