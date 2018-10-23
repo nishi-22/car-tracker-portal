@@ -9,8 +9,8 @@ import { Observable } from 'rxjs';
 })
 export class VehicleService {
 
-  //carTrackerAPI: string = "https://car-tracker-api-219421.appspot.com";
-  carTrackerAPI: string = "http://localhost:8080";
+  carTrackerAPI: string = "https://car-tracker-api-219421.appspot.com";
+  //carTrackerAPI: string = "http://localhost:8080";
 
   constructor(private httpClient: HttpClient) {
   }

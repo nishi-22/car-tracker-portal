@@ -12,6 +12,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { VehicleDetailComponent } from './vehicle-detail/vehicle-detail.component';
 
 import { AgmCoreModule } from '@agm/core';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 const appRoutes: Routes = [
   { path: 'vehicle-list', component: VehicleListComponent },
@@ -36,7 +37,8 @@ const appRoutes: Routes = [
     ),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBUGp-lAiwytAAom2IkCtRxyalDnAesdb4'
-    })
+    }),
+    NgxChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

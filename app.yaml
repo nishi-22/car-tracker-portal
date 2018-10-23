@@ -7,3 +7,6 @@ handlers:
   upload: dist/index.html
 - url: /
   static_dir: dist
+- url: /vehicle-detail/*
+  static_files: dist/index.html
+  upload: dist/index.html

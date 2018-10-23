@@ -1,5 +1,5 @@
 <agm-map
-  *ngIf="markers"
+  *ngIf="markers.length > 0"
   [latitude]="markers[0].latitude"
   [longitude]="markers[0].longitude"
   [zoom]="1"
@@ -14,3 +14,21 @@
 
   </agm-marker>
 </agm-map>
+
+<h1>Chart Should appear here!</h1>
+
+<ngx-charts-line-chart
+  [view]="view"
+  [scheme]="colorScheme"
+  [results]="multi"
+  [gradient]="gradient"
+  [xAxis]="showXAxis"
+  [yAxis]="showYAxis"
+  [legend]="showLegend"
+  [showXAxisLabel]="showXAxisLabel"
+  [showYAxisLabel]="showYAxisLabel"
+  [xAxisLabel]="xAxisLabel"
+  [yAxisLabel]="yAxisLabel"
+  [autoScale]="autoScale"
+  (select)="onSelect($event)">
+</ngx-charts-line-chart>
