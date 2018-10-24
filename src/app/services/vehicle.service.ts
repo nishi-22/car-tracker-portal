@@ -22,4 +22,8 @@ export class VehicleService {
   getVehiclePositions(vin: string): Observable<any> {
     return this.httpClient.get(`${this.carTrackerAPI}/readings/vehicle/position/${vin}`);
   }
+
+  getVehicleReadings(vin: string, field: string, timeRange: number){
+    return this.httpClient.get(`${this.carTrackerAPI}/readings/${vin}/${field}/${timeRange}`);
+  }
 }

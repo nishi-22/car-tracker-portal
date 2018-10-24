@@ -2,13 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { VehicleService } from "../../services/vehicle.service";
 import {single, multi} from './data';
-
-interface marker {
-  lat: number;
-  lng: number;
-  label?: string;
-  draggable: boolean;
-}
+import {MatSelectChange} from "@angular/material";
 
 @Component({
   selector: 'app-vehicle-detail',
@@ -18,29 +12,69 @@ interface marker {
 export class VehicleDetailComponent implements OnInit {
 
   markers = [];
-  vin: string;
-  lat: number = 51.678418;
-  lng: number = 7.809007;
+  chartData: any [];
 
-  single: any[];
-  multi: any[];
+  vin: string;
+
+  selectedVehicleSignal;
+  selectedTimeRange;
 
   view: any[] = [700, 400];
 
   // options
   showXAxis = true;
   showYAxis = true;
-  gradient = false;
+  gradient = true;
   showLegend = true;
   showXAxisLabel = true;
+  yAxisLabel = '';
   xAxisLabel = 'Time Stamp';
   showYAxisLabel = true;
-  yAxisLabel = 'Fuel Volume';
+
 
   colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+    domain: ['#A10A28', '#C7B42C', '#AAAAAA']
   };
 
+  readingsFields = [{
+      value: "fuelVolume",
+      viewValue: "Fuel Volume"
+    },{
+      value: "engineRpm",
+      viewValue: "Engine Rpm"
+    },{
+      value: "engineHp",
+      viewValue: "Engine HP"
+    },{
+      value: "speed",
+      viewValue: "Speed"
+  }];
+
+  timeRange = [{
+      value: 15,
+      viewValue: "15 Minutes"
+    },{
+      value: 30,
+      viewValue: "30 Minutes"
+    },{
+      value: 45,
+      viewValue: "45 Minutes"
+    },{
+      value: 60,
+      viewValue: "1 Hour"
+    },{
+      value: 75,
+      viewValue: "1 Hour 15 Minutes"
+    },{
+      value: 90,
+      viewValue: "1 Hour 30 Minutes"
+    },{
+      value: 105,
+      viewValue: "1 Hour 45 Minutes"
+    },{
+      value: 120,
+      viewValue: "2 Hours"
+  }];
   // line, area
   autoScale = true;
 
@@ -55,8 +89,30 @@ export class VehicleDetailComponent implements OnInit {
   ngOnInit() {
     this.vehicleService.getVehiclePositions(this.vin).subscribe((vehiclePositions) => {
       this.markers = vehiclePositions;
-      console.log(vehiclePositions);
     });
+  }
+
+  getReadings(){
+    this.vehicleService.getVehicleReadings(this.vin,
+      this.selectedVehicleSignal,
+      this.selectedTimeRange).subscribe(data => {
+        this.yAxisLabel = this.readingsFields.filter((field) =>
+          field.value === this.selectedVehicleSignal)[0].viewValue;
+        this.chartData = [{
+          name: this.selectedVehicleSignal,
+          series: data
+        }]
+    });
+  }
+
+  onSignalSelect(event: MatSelectChange){
+    this.selectedVehicleSignal = event.value;
+    this.selectedTimeRange = "";
+  }
+
+  onTimeRangeSelect(event: MatSelectChange){
+    this.selectedTimeRange = event.value;
+    this.getReadings();
   }
 
 }

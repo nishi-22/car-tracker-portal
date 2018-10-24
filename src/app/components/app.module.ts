@@ -3,10 +3,14 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatTableModule} from "@angular/material";
+import {
+    MatTableModule,
+    MatGridListModule,
+    MatToolbarModule,
+    MatSelectModule
+  } from "@angular/material";
 import { HttpClientModule } from '@angular/common/http';
 
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
 import { RouterModule, Routes } from '@angular/router';
 import { VehicleDetailComponent } from './vehicle-detail/vehicle-detail.component';
@@ -32,6 +36,8 @@ const appRoutes: Routes = [
     MatTableModule,
     HttpClientModule,
     MatToolbarModule,
+    MatGridListModule,
+    MatSelectModule,
     RouterModule.forRoot(
       appRoutes
     ),

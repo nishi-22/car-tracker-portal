@@ -2,3 +2,17 @@ agm-map {
   height: 300px;
   padding: 20px;
 }
+
+.vehicle-detail-container {
+  padding: 20px;
+}
+
+.vehicle-detail-container ngx-charts-line-chart {
+  margin-top: 70px;
+}
+.vehicle-detail-container mat-grid-tile-header {
+  height: 100px;
+}
+.vehicle-detail-container mat-form-field {
+  margin-left: 20px;
+}
