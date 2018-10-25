@@ -4,11 +4,12 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-    MatTableModule,
-    MatGridListModule,
-    MatToolbarModule,
-    MatSelectModule
-  } from "@angular/material";
+  MatTableModule,
+  MatGridListModule,
+  MatToolbarModule,
+  MatSelectModule,
+  MatSortModule
+} from "@angular/material";
 import { HttpClientModule } from '@angular/common/http';
 
 import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
@@ -38,6 +39,7 @@ const appRoutes: Routes = [
     MatToolbarModule,
     MatGridListModule,
     MatSelectModule,
+    MatSortModule,
     RouterModule.forRoot(
       appRoutes
     ),

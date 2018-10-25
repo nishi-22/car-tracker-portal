@@ -2,7 +2,7 @@
   <div  *ngFor="let column of displayedColumns">
     <span id="{{column.id}}">{{column.id}}</span>
   </div>
-  <table mat-table [dataSource]="dataSource" style="width: 100%">
+  <table mat-table matSort [dataSource]="dataSource" style="width: 100%">
     <ng-container matColumnDef="{{column.id}}" *ngFor="let column of columnNames; let i = index">
       <mat-header-cell *matHeaderCellDef mat-sort-header> {{column.value}} </mat-header-cell>
       <mat-cell [attr.data-index]="i"  *matCellDef="let element"> {{element[column.id]}} </mat-cell>

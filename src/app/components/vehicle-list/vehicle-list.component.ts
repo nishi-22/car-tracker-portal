@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Vehicle} from "./Vehicle";
 import {VehicleService} from "../../services/vehicle.service";
-import { MatTableDataSource} from '@angular/material';
+import {MatSort, MatTableDataSource} from '@angular/material';
 import {Router} from "@angular/router";
 
 @Component({
@@ -32,10 +32,15 @@ export class VehicleListComponent implements OnInit {
       id: "maxFuelVolume",
       value: "Max Fuel Volume"
     },{
+      id: "highAlerts",
+      value: "No. of Alerts"
+    }, {
       id: "lastServiceDate",
       value: "Last Service Date"
-  }];
+    }];
   vehicles;
+
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private vehicleService: VehicleService,
               private router: Router) { }
@@ -46,6 +51,7 @@ export class VehicleListComponent implements OnInit {
       .subscribe(vehicles => {
         this.vehicles = vehicles;
         this.dataSource = new MatTableDataSource<Vehicle>(vehicles);
+        this.dataSource.sort = this.sort;
       });
 
   }
