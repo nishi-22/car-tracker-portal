@@ -99,7 +99,7 @@ export class VehicleDetailComponent implements OnInit {
         this.yAxisLabel = this.readingsFields.filter((field) =>
           field.value === this.selectedVehicleSignal)[0].viewValue;
         this.chartData = [{
-          name: this.selectedVehicleSignal,
+          name: this.yAxisLabel,
           series: data
         }]
     });

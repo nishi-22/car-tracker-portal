@@ -9,8 +9,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build-prod": "ng build --prod",
-    "upload-dist": "npm run build-prod &&  ./uploadDist.sh",
-    "deploy": "gcloud app deploy",
+    "upload-dist": "npm run build-prod && ./uploadDist.sh",
+    "deploy": "gcloud app deploy --project car-tracker-portal",
     "reset-project-id": "gcloud config set project car-tracker-api-219421"
   },
   "private": true,
