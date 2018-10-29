@@ -1,12 +1,13 @@
 agm-map {
-  height: 768px;
-  width: 1024px;
+  height: 60vh;
+  width: 100vw;
   padding: 20px;
 }
 
 .example-card {
   max-width: 400px;
 }
+
 .mat-card-subtitle{
   text-align: left;
 }

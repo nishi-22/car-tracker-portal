@@ -19,7 +19,7 @@ export class VehicleDetailComponent implements OnInit {
   selectedVehicleSignal;
   selectedTimeRange;
 
-  view: any[] = [1024, 768];
+  view: any[] = [1350, 450];
 
   // options
   showXAxis = true;
