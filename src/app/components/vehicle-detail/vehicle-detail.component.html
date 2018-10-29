@@ -1,43 +1,63 @@
 <div class="vehicle-detail-container">
-  <agm-map
-    *ngIf="markers.length > 0"
-    [latitude]="markers[0].latitude"
-    [longitude]="markers[0].longitude"
-    [zoom]="1"
-    [disableDefaultUI]="false"
-    [zoomControl]="false">
+  <mat-card class="vehicle-card">
+    <mat-card-header>
+      <div mat-card-avatar>
+        <img *ngIf="vehicle" mat-card-image
+             src="assets/images/{{vehicle.model|lowercase}}.jpg"
+             alt="Photo of a {{vehicle.model|lowercase}}">
+      </div>
+      <mat-card-title>{{vehicle?.make}} {{vehicle?.model}} ({{vehicle?.year}})</mat-card-title>
+      <mat-card-subtitle>{{vehicle?.vin}}</mat-card-subtitle>
+    </mat-card-header>
+  </mat-card>
+  <mat-divider></mat-divider>
+  <mat-tab-group>
+    <mat-tab label="Vehicle Locations">
+      <agm-map
+        *ngIf="markers.length > 0"
+        [latitude]="markers[0].latitude"
+        [longitude]="markers[0].longitude"
+        [zoom]="3"
+        [disableDefaultUI]="false"
+        [zoomControl]="false">
 
-    <agm-marker
-      *ngFor="let m of markers; let i = index"
-      [latitude]="m.latitude"
-      [longitude]="m.longitude"
-      [markerDraggable]="false">
-    </agm-marker>
+        <agm-marker
+          *ngFor="let m of markers; let i = index"
+          [latitude]="m.latitude"
+          [longitude]="m.longitude"
+          [markerDraggable]="false">
+        </agm-marker>
 
-  </agm-map>
-  <mat-grid-list cols="2" rowHeight="500px" *ngIf="markers.length === 0">
-    <mat-grid-tile>
-      There are no vehicle location available at this moment. Please try again later.
-    </mat-grid-tile>
-  </mat-grid-list>
-  <mat-grid-list cols="2" rowHeight="600px">
-    <mat-grid-tile>
-      <mat-grid-tile-header>
-        <mat-form-field>
-          <mat-select placeholder="Vehicle Signal" (selectionChange)="onSignalSelect($event)" [(value)]="selectedVehicleSignal">
-            <mat-option *ngFor="let readingField of readingsFields" [value]="readingField.value">
-              {{readingField.viewValue}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-select placeholder="Time Range" (selectionChange)="onTimeRangeSelect($event)" [(value)]="selectedTimeRange">
-            <mat-option *ngFor="let range of timeRange" [value]="range.value">
-              {{range.viewValue}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </mat-grid-tile-header>
+      </agm-map>
+    </mat-tab>
+    <mat-tab label="Vehicle Signals">
+      <div class="vehicle-signal-tab">
+        <mat-grid-list cols="4" rowHeight="100px">
+          <mat-grid-tile
+            colspan="4"
+            rowspan="1">
+            <mat-form-field>
+              <mat-select placeholder="Vehicle Signal" (selectionChange)="onSignalSelect($event)" [(value)]="selectedVehicleSignal">
+                <mat-option *ngFor="let readingField of readingsFields" [value]="readingField.value">
+                  {{readingField.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-select placeholder="Time Range" (selectionChange)="onTimeRangeSelect($event)" [(value)]="selectedTimeRange">
+                <mat-option *ngFor="let range of timeRange" [value]="range.value">
+                  {{range.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+
+      <h2 *ngIf="markers.length === 0">
+        There are no vehicle location available at this moment. Please try again later.
+      </h2>
+
       <div *ngIf="!chartData">
         <h4>Please select Vehicle Signal to render chart.</h4>
       </div>
@@ -56,6 +76,9 @@
         [yAxisLabel]="yAxisLabel"
         [autoScale]="autoScale">
       </ngx-charts-line-chart>
-    </mat-grid-tile>
-  </mat-grid-list>
+
+
+    </mat-tab>
+    <mat-tab label="Vehicle Historical Alerts"> Content 3 </mat-tab>
+  </mat-tab-group>
 </div>

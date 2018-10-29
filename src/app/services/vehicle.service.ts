@@ -26,4 +26,8 @@ export class VehicleService {
   getVehicleReadings(vin: string, field: string, timeRange: number){
     return this.httpClient.get(`${this.carTrackerAPI}/readings/${vin}/${field}/${timeRange}`);
   }
+
+  getVehicleByVin(vin: string){
+    return this.httpClient.get(`${this.carTrackerAPI}/vehicle/${vin}`);
+  }
 }

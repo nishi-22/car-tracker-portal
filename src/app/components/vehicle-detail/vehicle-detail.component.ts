@@ -13,13 +13,13 @@ export class VehicleDetailComponent implements OnInit {
 
   markers = [];
   chartData: any [];
-
+  vehicle: any;
   vin: string;
 
   selectedVehicleSignal;
   selectedTimeRange;
 
-  view: any[] = [700, 400];
+  view: any[] = [1024, 768];
 
   // options
   showXAxis = true;
@@ -87,6 +87,9 @@ export class VehicleDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.vehicleService.getVehicleByVin(this.vin).subscribe((vehicle)=>{
+      this.vehicle = vehicle;
+    });
     this.vehicleService.getVehiclePositions(this.vin).subscribe((vehiclePositions) => {
       this.markers = vehiclePositions;
     });

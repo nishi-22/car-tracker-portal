@@ -8,7 +8,9 @@ import {
   MatGridListModule,
   MatToolbarModule,
   MatSelectModule,
-  MatSortModule
+  MatSortModule,
+  MatTabsModule,
+  MatDividerModule, MatCardModule
 } from "@angular/material";
 import { HttpClientModule } from '@angular/common/http';
 
@@ -40,6 +42,9 @@ const appRoutes: Routes = [
     MatGridListModule,
     MatSelectModule,
     MatSortModule,
+    MatTabsModule,
+    MatDividerModule,
+    MatCardModule,
     RouterModule.forRoot(
       appRoutes
     ),
