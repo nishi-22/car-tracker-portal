@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { VehicleService } from "../../services/vehicle.service";
 import {single, multi} from './data';
-import {MatSelectChange} from "@angular/material";
+import {MatSelectChange, MatTableDataSource} from "@angular/material";
+import {Vehicle} from "../vehicle-list/Vehicle";
+import {HistoricalAlert} from "./HistoricalAlert";
 
 @Component({
   selector: 'app-vehicle-detail',
@@ -15,7 +17,9 @@ export class VehicleDetailComponent implements OnInit {
   chartData: any [];
   vehicle: any;
   vin: string;
-
+  historicalAlerts: any;
+  historicalAlertsDataSource;
+  displayedColumns;
   selectedVehicleSignal;
   selectedTimeRange;
 
@@ -48,6 +52,17 @@ export class VehicleDetailComponent implements OnInit {
     },{
       value: "speed",
       viewValue: "Speed"
+  }];
+
+  historicalAlertsColumns = [{
+    id: "rule",
+    value: "Rule"
+  },{
+    id: "priority",
+    value: "Priority"
+  },{
+    id: "alertTime",
+    value: "Alert Time"
   }];
 
   timeRange = [{
@@ -87,12 +102,18 @@ export class VehicleDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.displayedColumns = this.historicalAlertsColumns.map(x => x.id);
     this.vehicleService.getVehicleByVin(this.vin).subscribe((vehicle)=>{
       this.vehicle = vehicle;
     });
+
     this.vehicleService.getVehiclePositions(this.vin).subscribe((vehiclePositions) => {
       this.markers = vehiclePositions;
     });
+
+    this.vehicleService.getVehicleHistoricalAlerts(this.vin).subscribe((alerts: HistoricalAlert[]) => {
+      this.historicalAlertsDataSource = new MatTableDataSource<HistoricalAlert>(alerts);
+    })
   }
 
   getReadings(){

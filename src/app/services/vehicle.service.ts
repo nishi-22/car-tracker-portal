@@ -30,4 +30,8 @@ export class VehicleService {
   getVehicleByVin(vin: string){
     return this.httpClient.get(`${this.carTrackerAPI}/vehicle/${vin}`);
   }
+
+  getVehicleHistoricalAlerts(vin: string){
+    return this.httpClient.get(`${this.carTrackerAPI}/alerts/${vin}`);
+  }
 }

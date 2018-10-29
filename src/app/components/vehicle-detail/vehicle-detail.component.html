@@ -79,6 +79,16 @@
 
 
     </mat-tab>
-    <mat-tab label="Vehicle Historical Alerts"> Content 3 </mat-tab>
+    <mat-tab label="Vehicle Historical Alerts">
+      <table mat-table matSort [dataSource]="historicalAlertsDataSource" style="width: 100%">
+        <ng-container matColumnDef="{{column.id}}" *ngFor="let column of historicalAlertsColumns; let i = index">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> {{column.value}} </mat-header-cell>
+          <mat-cell [attr.data-index]="i"  *matCellDef="let element"> {{element[column.id]}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </table>
+    </mat-tab>
   </mat-tab-group>
 </div>
